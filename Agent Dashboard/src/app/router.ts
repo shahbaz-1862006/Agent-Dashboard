@@ -1,28 +1,6 @@
 import { createRouter as createVueRouter, createWebHashHistory, Router, RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from './auth/authStore'
 
-// Auth pages
-import LoginPage from '@/pages/auth/LoginPage.vue'
-import RegisterPage from '@/pages/auth/RegisterPage.vue'
-import InviteEntryPage from '@/pages/auth/InviteEntryPage.vue'
-import NotFoundPage from '@/pages/misc/NotFoundPage.vue'
-
-// Dashboard pages
-import DashboardLayout from '@/app/shell/DashboardLayout.vue'
-import HomePage from '@/pages/dashboard/HomePage.vue'
-import WalletPage from '@/pages/dashboard/WalletPage.vue'
-import PlayersPage from '@/pages/dashboard/PlayersPage.vue'
-import PlayerDetailPage from '@/pages/dashboard/PlayerDetailPage.vue'
-import InvitesPage from '@/pages/dashboard/InvitesPage.vue'
-import PayoutsPage from '@/pages/dashboard/PayoutsPage.vue'
-import CommissionsPage from '@/pages/dashboard/CommissionsPage.vue'
-import StatementDetailPage from '@/pages/dashboard/StatementDetailPage.vue'
-import ClanOverviewPage from '@/pages/dashboard/ClanOverviewPage.vue'
-import ClanGoalsPage from '@/pages/dashboard/ClanGoalsPage.vue'
-import ClanWarsPage from '@/pages/dashboard/ClanWarsPage.vue'
-import WarDetailPage from '@/pages/dashboard/WarDetailPage.vue'
-import SettingsPage from '@/pages/dashboard/SettingsPage.vue'
-
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -30,15 +8,15 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/invite',
-    component: InviteEntryPage,
+    component: () => import('@/pages/auth/InviteEntryPage.vue'),
   },
   {
     path: '/login',
-    component: LoginPage,
+    component: () => import('@/pages/auth/LoginPage.vue'),
   },
   {
     path: '/register',
-    component: RegisterPage,
+    component: () => import('@/pages/auth/RegisterPage.vue'),
   },
   // Backwards compatible redirects
   {
@@ -51,7 +29,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/dashboard',
-    component: DashboardLayout,
+    component: () => import('@/app/shell/DashboardLayout.vue'),
     meta: { requiresAuth: true },
     children: [
       {
@@ -60,61 +38,61 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'home',
-        component: HomePage,
+        component: () => import('@/pages/dashboard/HomePage.vue'),
       },
       {
         path: 'wallet',
-        component: WalletPage,
+        component: () => import('@/pages/dashboard/WalletPage.vue'),
       },
       {
         path: 'players',
-        component: PlayersPage,
+        component: () => import('@/pages/dashboard/PlayersPage.vue'),
       },
       {
         path: 'players/:playerId',
-        component: PlayerDetailPage,
+        component: () => import('@/pages/dashboard/PlayerDetailPage.vue'),
       },
       {
         path: 'invites',
-        component: InvitesPage,
+        component: () => import('@/pages/dashboard/InvitesPage.vue'),
       },
       {
         path: 'payouts',
-        component: PayoutsPage,
+        component: () => import('@/pages/dashboard/PayoutsPage.vue'),
       },
       {
         path: 'commissions',
-        component: CommissionsPage,
+        component: () => import('@/pages/dashboard/CommissionsPage.vue'),
       },
       {
         path: 'commissions/statements/:statementId',
-        component: StatementDetailPage,
+        component: () => import('@/pages/dashboard/StatementDetailPage.vue'),
       },
       {
         path: 'clan',
-        component: ClanOverviewPage,
+        component: () => import('@/pages/dashboard/ClanOverviewPage.vue'),
       },
       {
         path: 'clan/goals',
-        component: ClanGoalsPage,
+        component: () => import('@/pages/dashboard/ClanGoalsPage.vue'),
       },
       {
         path: 'clan/wars',
-        component: ClanWarsPage,
+        component: () => import('@/pages/dashboard/ClanWarsPage.vue'),
       },
       {
         path: 'clan/wars/:warId',
-        component: WarDetailPage,
+        component: () => import('@/pages/dashboard/WarDetailPage.vue'),
       },
       {
         path: 'settings',
-        component: SettingsPage,
+        component: () => import('@/pages/dashboard/SettingsPage.vue'),
       },
     ],
   },
   {
     path: '/404',
-    component: NotFoundPage,
+    component: () => import('@/pages/misc/NotFoundPage.vue'),
   },
   {
     path: '/:pathMatch(.*)*',
